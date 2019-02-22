@@ -6,10 +6,13 @@ export default class Beer extends Component {
     constructor(props){
         super(props)
         this.state = {
-          beer: ""
+          beer: null
         }
       }
     render(){
+      if (!this.state.beer) {
+        return <div>Loading...</div>
+      }
     return (
       <div>
         <Header />
@@ -29,20 +32,12 @@ export default class Beer extends Component {
     )
   }
   componentDidMount(){
-    if(this.props.isRandom === "true") {
-      api.getRandomBeer()
-        .then(beer => {
-          this.setState({
-            beer: beer.data[0]
-          })
+    let promise = this.props.isRandom ? api.getRandomBeer() : api.getSingleBeer(this.props.match.params.id)
+    promise
+      .then(beer => {
+        this.setState({
+          beer: beer
         })
-    } else {
-      api.getSingleBeer(this.props.match.params.id)
-          .then(beer => {
-            this.setState({
-              beer: beer.data
-            })
-          })
-      }
+      })
     }
 }

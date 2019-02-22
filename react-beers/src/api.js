@@ -24,11 +24,11 @@ export default {
     },
     getSingleBeer(id){
         return service.get(`single/${id}`)
-            .then(res => {return res})
+            .then(res => res.data)
     },
     getRandomBeer(){
         return service.get('random')
-            .then(res => {return res})
+            .then(res => res.data[0])
     },
     createNewBeer(newBeer){
         return service.post('new', newBeer)

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 export default class Home extends Component {
   render() {
+    // To improve: Create a component for each link
     return (
       <div className="Home">
         <img src="/images/all-beers.jpg" alt="all-beers" className="banner" />
